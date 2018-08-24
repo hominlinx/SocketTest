@@ -65,7 +65,9 @@ int main()
 			int i;
 			int rc;
 			rc = setsockopt(server_sockfd, SOL_SOCKET, SO_BINDTODEVICE, device, strlen(device)+1);
-		
+            if (rc <=0) {
+                perror("socket");
+            }
 		}
 
     //

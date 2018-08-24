@@ -15,7 +15,8 @@ int main()
 	memset(&remote_addr, 0, sizeof(remote_addr));
 	remote_addr.sin_family = AF_INET;
 
-	char ip_address[] = "127.0.0.1";
+    //NOTE: ip should modify.
+	char ip_address[] = "192.168.3.2";
 	remote_addr.sin_addr.s_addr = inet_addr(ip_address);
 	remote_addr.sin_port = htons(8000);
 
@@ -25,7 +26,7 @@ int main()
 		return 1;
 	}
 
-//
+    //NOTE: This is interface, should modify
     char *device = "eth0.7";
 
 	if (device) {
@@ -33,7 +34,9 @@ int main()
 			int i;
 			int rc;
 			rc = setsockopt(client_sockfd, SOL_SOCKET, SO_BINDTODEVICE, device, strlen(device)+1);
-		
+            if (rc <= 0) {
+                perror("socket");
+            }
 		}
 
     //
